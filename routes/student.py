@@ -54,4 +54,4 @@ def add_student():
 
         return redirect(url_for("student.students"))
 
-    # return render_template("add_student.html")
+    return render_template("add_student.html")
