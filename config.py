@@ -1,8 +1,23 @@
-class Config:
-    SECRET_KEY = "student-management-secret-key"
+# class Config:
+#     SECRET_KEY = "student-management-secret-key"
 
+#     SQLALCHEMY_DATABASE_URI = (
+#         "mysql+pymysql://student_user:student@123@localhost/student_management"
+#      )
+
+#     SQLALCHEMY_TRACK_MODIFICATIONS = False
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class Config:
     SQLALCHEMY_DATABASE_URI = (
-        "mysql+pymysql://student_user:student@123@localhost/student_management"
-     )
+        f"mysql+pymysql://"
+        f"{os.getenv('DB_USER')}:"
+        f"{os.getenv('DB_PASSWORD')}@"
+        f"{os.getenv('DB_HOST')}/"
+        f"{os.getenv('DB_NAME')}"
+    )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
