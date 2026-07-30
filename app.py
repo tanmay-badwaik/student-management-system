@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for
 
 from config import Config
 from models import db
@@ -14,6 +14,8 @@ db.init_app(app)
 
 app.register_blueprint(home_bp)
 app.register_blueprint(student_bp)
+
+
 
 if __name__ == "__main__":
     with app.app_context():

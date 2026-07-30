@@ -14,6 +14,26 @@ def students():
         students=students
     )
 
+@student_bp.route("/edit_student/<int:id>", methods=["GET", "POST"])
+def edit_student(id):
+
+    student = Student.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        student.name = request.form["name"]
+        student.email = request.form["email"]
+        student.course = request.form["course"]
+
+        db.session.commit()
+
+        return redirect(url_for("student.students"))
+
+    return render_template(
+        "edit_student.html",
+        student=student
+    )
+    
 @student_bp.route("/add", methods=["GET", "POST"])
 def add_student():
 
@@ -32,6 +52,6 @@ def add_student():
         db.session.add(student)
         db.session.commit()
 
-        return redirect(url_for("student.add_student"))
+        return redirect(url_for("student.students"))
 
-    return render_template("add_student.html")
+    # return render_template("add_student.html")
