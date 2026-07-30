@@ -6,24 +6,46 @@ Students
 
 {% block content %}
 
-<h2>Students List</h2>
+<h2 class="mb-4">Students List</h2>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-striped">
+
     <thead class="table-dark">
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Email</th>
             <th>Course</th>
         </tr>
     </thead>
 
     <tbody>
+
+    {% if students %}
+
+        {% for student in students %}
+
         <tr>
-            <td colspan="3" class="text-center">
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.course }}</td>
+        </tr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <tr>
+            <td colspan="4" class="text-center">
                 No students found
             </td>
         </tr>
+
+    {% endif %}
+
     </tbody>
+
 </table>
 
 {% endblock %}
