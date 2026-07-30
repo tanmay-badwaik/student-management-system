@@ -43,17 +43,17 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
-        <a class="navbar-brand" href="/">Student Management</a>
+       <a class="navbar-brand" href="{{ url_for('home.home') }}">Student Management</a>
 
-        <div class="navbar-nav ms-auto">
+    <div class="navbar-nav ms-auto">
 
-            <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="{{ url_for('home.home') }}">Home</a>
 
-            <a class="nav-link" href="/students">Students</a>
+        <a class="nav-link" href="{{ url_for('student.students') }}">Students</a>
 
-            <a class="nav-link" href="/add-student">Add Student</a>
+        <a class="nav-link" href="{{ url_for('student.add_student') }}">Add Student</a>
 
-        </div>
+    </div>
 
     </div>
 </nav>

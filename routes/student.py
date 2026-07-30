@@ -4,6 +4,9 @@ from models.student import Student
 
 student_bp = Blueprint("student", __name__, url_prefix="/students")
 
+@student_bp.route("/")
+def students():
+    return render_template("students.html")
 
 @student_bp.route("/add", methods=["GET", "POST"])
 def add_student():
