@@ -34,6 +34,18 @@ def edit_student(id):
         student=student
     )
     
+    
+@student_bp.route("/delete/<int:id>")
+def delete_student(id):
+
+    student = Student.query.get_or_404(id)
+
+    db.session.delete(student)
+    db.session.commit()
+
+    return redirect(url_for("student.students"))
+
+
 @student_bp.route("/add", methods=["GET", "POST"])
 def add_student():
 
