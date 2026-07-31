@@ -26,6 +26,8 @@ def edit_student(id):
         student.course = request.form["course"]
 
         db.session.commit()
+        flash("Student updated successfully!", "success")
+
 
         return redirect(url_for("student.students"))
 
@@ -43,8 +45,7 @@ def delete_student(id):
     db.session.delete(student)
     db.session.commit()
 
-    flash("Student deleted successfully!", "danger")
-
+    flash("Student deleted successfully!", "success")
     return redirect(url_for("student.students"))
 
 
