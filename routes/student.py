@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models import db
 from models.student import Student
 
@@ -43,6 +43,8 @@ def delete_student(id):
     db.session.delete(student)
     db.session.commit()
 
+    flash("Student deleted successfully!", "danger")
+
     return redirect(url_for("student.students"))
 
 
@@ -63,6 +65,8 @@ def add_student():
 
         db.session.add(student)
         db.session.commit()
+        
+        flash("Student added successfully!", "success")
 
         return redirect(url_for("student.students"))
 
