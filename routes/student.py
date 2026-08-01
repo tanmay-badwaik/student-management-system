@@ -9,6 +9,9 @@ student_bp = Blueprint("student", __name__, url_prefix="/students")
 def students():
 
     search = request.args.get("search", "")
+    page = request.args.get("page", 1, type=int)
+    
+    query = Student.query
 
     if search:
 
@@ -22,11 +25,11 @@ def students():
 
         )
 
-    ).all()
-
-    else:
-
-        students = Student.query.all()
+    )
+    students = query.paginate(
+        page=page,
+        per_page=5
+    )
 
     return render_template(
         "students.html",
