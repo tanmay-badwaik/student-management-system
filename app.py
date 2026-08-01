@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from config import Config
 from models import db
@@ -17,6 +18,25 @@ app.register_blueprint(home_bp)
 app.register_blueprint(student_bp)
 
 
+@app.route("/create-admin")
+def create_admin():
+
+    existing_user = User.query.filter_by(username="admin").first()
+
+    if existing_user:
+        return "Admin already exists!"
+
+    hashed_password = generate_password_hash("admin123")
+
+    admin = User(
+        username="admin",
+        password=hashed_password
+    )
+
+    db.session.add(admin)
+    db.session.commit()
+
+    return "Admin user created successfully!"
 
 if __name__ == "__main__":
     with app.app_context():
