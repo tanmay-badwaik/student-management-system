@@ -6,24 +6,77 @@ Home
 
 {% block content %}
 
-<div class="card shadow">
+<div class="text-center mb-5">
 
-    <div class="card-body">
+    <h1 class="display-5 fw-bold text-primary">
+        Welcome to Student Management System
+    </h1>
 
-        <h1 class="text-primary">
-            Welcome to Student Management System
-        </h1>
+    <p class="lead text-muted">
+        Manage students easily using Flask, SQLAlchemy and Bootstrap.
+    </p>
 
-        <p class="lead">
-            This project is built using Flask and Bootstrap.
-        </p>
+</div>
 
-        <a href="{{ url_for('student.add_student') }}"
-            class="btn btn-success">
-            Add Student
-        </a>
+<div class="row g-4">
+
+    <div class="col-md-6">
+
+        <div class="card shadow text-center">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    👨‍🎓 Total Students
+                </h5>
+
+                <h2 class="text-success">
+                    {{ total_students }}
+                </h2>
+
+            </div>
+
+        </div>
 
     </div>
+
+    <div class="col-md-6">
+
+        <div class="card shadow text-center">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    👤 Total Users
+                </h5>
+
+                <h2 class="text-primary">
+                    {{ total_users }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="text-center mt-5">
+
+    <a href="{{ url_for('student.add_student') }}"
+       class="btn btn-success btn-lg">
+
+        Add Student
+
+    </a>
+
+    <a href="{{ url_for('student.students') }}"
+       class="btn btn-primary btn-lg">
+
+        View Students
+
+    </a>
 
 </div>
 
