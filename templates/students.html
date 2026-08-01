@@ -36,6 +36,15 @@ Students
     </div>
 
 </div>
+<p class="text-muted">
+    Showing
+    {{ students.first }}
+    -
+    {{ students.last }}
+    of
+    {{ students.total }}
+    students
+</p>
 
 <div class="card shadow">
 
@@ -102,7 +111,7 @@ Students
             </tbody>
 
         </table>
-        
+
         <nav>
 
             <ul class="pagination justify-content-center">
