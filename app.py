@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from config import Config
 from models import db
 from models.student import Student
+from models.user import User
 
 from routes.home import home_bp
 from routes.student import student_bp
