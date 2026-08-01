@@ -82,21 +82,23 @@
             class="collapse navbar-collapse"
             id="navbarNav">
 
-            <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto">
+
+            <li class="nav-item">
+
+                <a class="nav-link"
+                href="{{ url_for('home.home') }}">
+                    Home
+                </a>
+
+            </li>
+
+            {% if session.get("user_id") %}
 
                 <li class="nav-item">
 
                     <a class="nav-link"
-                       href="{{ url_for('home.home') }}">
-                        Home
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="{{ url_for('student.students') }}">
+                    href="{{ url_for('student.students') }}">
                         Students
                     </a>
 
@@ -105,11 +107,20 @@
                 <li class="nav-item">
 
                     <a class="nav-link"
-                       href="{{ url_for('student.add_student') }}">
+                    href="{{ url_for('student.add_student') }}">
                         Add Student
                     </a>
 
                 </li>
+
+                <li class="nav-item">
+
+                    <span class="nav-link">
+                        Welcome, {{ session["username"] }}
+                    </span>
+
+                </li>
+
                 <li class="nav-item">
 
                     <a class="nav-link"
@@ -119,7 +130,20 @@
 
                 </li>
 
-            </ul>
+            {% else %}
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                    href="{{ url_for('auth.login') }}">
+                        Login
+                    </a>
+
+                </li>
+
+            {% endif %}
+
+        </ul>
 
         </div>
 
