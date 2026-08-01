@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models import db
 from models.student import Student
+from sqlalchemy import or_
 
 student_bp = Blueprint("student", __name__, url_prefix="/students")
 
@@ -12,8 +13,16 @@ def students():
     if search:
 
         students = Student.query.filter(
-            Student.name.ilike(f"%{search}%")
-        ).all()
+
+        or_(
+
+            Student.name.ilike(f"%{search}%"),
+            Student.email.ilike(f"%{search}%"),
+            Student.course.ilike(f"%{search}%")
+
+        )
+
+    ).all()
 
     else:
 
