@@ -26,7 +26,7 @@ def students():
 
     if search:
 
-        students = query.filter(
+        query  = query.filter(
 
         or_(
 
