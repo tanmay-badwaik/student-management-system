@@ -1,4 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+# from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    flash,
+    session
+)
 from models import db
 from models.student import Student
 from sqlalchemy import or_
@@ -7,7 +16,17 @@ student_bp = Blueprint("student", __name__, url_prefix="/students")
 
 @student_bp.route("/")
 def students():
+    if "user_id" not in session:
 
+        flash(
+            "Please login first!",
+            "warning"
+        )
+
+        return redirect(
+            url_for("auth.login")
+        )
+    
     search = request.args.get("search", "")
     page = request.args.get("page", 1, type=int)
     
