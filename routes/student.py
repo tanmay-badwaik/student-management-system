@@ -11,21 +11,13 @@ from flask import (
 from models import db
 from models.student import Student
 from sqlalchemy import or_
+from utils.auth import login_required
 
 student_bp = Blueprint("student", __name__, url_prefix="/students")
 
 @student_bp.route("/")
+@login_required
 def students():
-    if "user_id" not in session:
-
-        flash(
-            "Please login first!",
-            "warning"
-        )
-
-        return redirect(
-            url_for("auth.login")
-        )
     
     search = request.args.get("search", "")
     page = request.args.get("page", 1, type=int)
@@ -57,6 +49,7 @@ def students():
     )
 
 @student_bp.route("/edit_student/<int:id>", methods=["GET", "POST"])
+@login_required
 def edit_student(id):
 
     student = Student.query.get_or_404(id)
@@ -80,6 +73,7 @@ def edit_student(id):
     
     
 @student_bp.route("/delete/<int:id>")
+@login_required
 def delete_student(id):
 
     student = Student.query.get_or_404(id)
@@ -92,6 +86,7 @@ def delete_student(id):
 
 
 @student_bp.route("/add", methods=["GET", "POST"])
+@login_required
 def add_student():
 
     if request.method == "POST":
