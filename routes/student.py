@@ -7,11 +7,22 @@ student_bp = Blueprint("student", __name__, url_prefix="/students")
 @student_bp.route("/")
 def students():
 
-    students = Student.query.all()
+    search = request.args.get("search", "")
+
+    if search:
+
+        students = Student.query.filter(
+            Student.name.ilike(f"%{search}%")
+        ).all()
+
+    else:
+
+        students = Student.query.all()
 
     return render_template(
         "students.html",
-        students=students
+        students=students,
+        search=search
     )
 
 @student_bp.route("/edit_student/<int:id>", methods=["GET", "POST"])
