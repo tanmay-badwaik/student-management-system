@@ -84,11 +84,11 @@ Students
 
                         </a>
 
-                        <a href="{{ url_for('student.delete_student', id=student.id) }}"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure you want to delete this student?')">
-                           
-                           Delete
+                        <a href="#"
+                            class="btn btn-danger btn-sm"
+                            onclick="showDeleteModal('{{ url_for('student.delete_student', id=student.id) }}')">
+
+                            Delete
 
                         </a>
 
@@ -174,5 +174,72 @@ Students
     </div>
 
 </div>
+<div class="modal fade" id="deleteModal" tabindex="-1">
 
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    🗑 Delete Student
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                Are you sure you want to delete this student?
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <a
+                    id="confirmDelete"
+                    href="#"
+                    class="btn btn-danger">
+
+                    Delete
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+function showDeleteModal(deleteUrl){
+
+    document.getElementById("confirmDelete").href = deleteUrl;
+
+    let modal = new bootstrap.Modal(
+        document.getElementById("deleteModal")
+    );
+
+    modal.show();
+
+}
+
+</script>
 {% endblock %}
